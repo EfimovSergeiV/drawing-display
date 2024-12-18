@@ -1,4 +1,5 @@
 public/WEBP/*
+conf.ts
 
 # Nuxt dev/build outputs
 .output
