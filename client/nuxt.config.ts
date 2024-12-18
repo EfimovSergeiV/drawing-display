@@ -1,3 +1,5 @@
+import cfg from "./conf"
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-10',
@@ -46,14 +48,9 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      name: "Листогибочный участок",
-
-      // baseURL: 'http://127.0.0.1:8000/',
-      baseURL: 'http://deop.local:8080/',
-      // baseURL: 'http://mon1.local:8080/',
-      // socketURL: 'ws://192.168.60.203:8080/',
-      socketURL: 'ws://deop.local:8080/',
-
+      name: cfg.name,
+      baseURL: cfg.baseURL,
+      socketURL: cfg.socketURL,
     },
   },
 })
