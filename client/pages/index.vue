@@ -63,9 +63,6 @@
     </div>
 
 
-    <!-- <SocketClient  class="pb-[120px]"/> -->
-
-
 
     <div class=" fixed z-50 bottom-0 w-full">
       <div class="grid grid-cols-1 md:grid-cols-3">

@@ -12,6 +12,8 @@
   const message = ref('');
   let socket: WebSocket | null = null;
 
+
+  const statusSocket = ref(false)
   // Подключение к серверу WebSocket
   const connectWebSocket = () => {
     socket = new WebSocket(wsUrl);
@@ -19,6 +21,7 @@
     // Событие: открытие соединения
     socket.onopen = () => {
       console.log('WebSocket соединение установлено');
+      statusSocket.value = false
     };
 
     let counter = 0
@@ -29,20 +32,22 @@
       mainStore.updateDrawings(
         JSON.parse(event.data)
       )
+      statusSocket.value = false
       // console.log('Получено сообщение:', event.data);
       // messages.value = event.data
       // messages.value.push(`Сервер: ${event.data}`);
     };
 
     // Событие: ошибка соединения
-    // socket.onerror = (error) => {
-    //   console.error('WebSocket ошибка:', error);
-    // };
+    socket.onerror = (error) => {
+      console.error('WebSocket ошибка:', error);
+      statusSocket.value = true
+    };
 
     // Событие: закрытие соединения
     socket.onclose = () => {
       console.log('WebSocket соединение закрыто');
-        
+      statusSocket.value = true  
 
       connectWebSocket();
 
@@ -84,6 +89,19 @@
 <template>
   <div class="selec t-none">
     <div class="">
+
+
+      <transition name="fade" mode="out-in">
+        <div v-if="statusSocket" class="fixed z-50 top-10 md:top-0 left-0 w-full">
+          <div class="flex items-center justify-center py-8 ">
+            <div class=" flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-red-500/80" >
+              <img src="/warning.png" alt="logo" class="h-6 md:h-8" />
+              <p class="text-center text-white font-bold text-xl md:text-2xl uppercase">НЕТ СВЯЗИ С СЕРВЕРОМ</p>
+            </div>
+            
+          </div>
+        </div>    
+      </transition>
 
 
       <slot />
