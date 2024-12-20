@@ -20,7 +20,9 @@ def send_message(channel_id, message):
         'channel_id': channel_id,
         'message': message
     }
+    
     # HotfiX
+    attempt_to_send = 5
     while attempt_to_send > 0:
         attempt_to_send -= 1
         try:
@@ -76,3 +78,5 @@ def mattermost_notification(template, data):
 
     rendered_string = template.render(context)
     send_message(CHANNEL_ID, rendered_string)
+
+    return f'Уведомление отправлено'

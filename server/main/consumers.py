@@ -64,15 +64,12 @@ class MyWebSocketConsumer(AsyncWebsocketConsumer):
         while self.keep_sending:
             counter += 1
 
+            # API URL
             base_url = f"http://deop.local:8080"
 
-            # Получаем данные
             serialized_data = await self.get_serialized_data(base_url)
 
-            # serialized_data = await self.get_serialized_data()
-            # print(serialized_data)
-            print(f'{now_time()} Отправка данных: {counter}')
-
+            # print(f'{now_time()} Отправка данных: {counter}')
 
             try:
                 # Пример отправки данных

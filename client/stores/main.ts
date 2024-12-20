@@ -28,8 +28,10 @@ export const useMainStore = defineStore('MainStore', {
   actions: {
     updateDrawings( data: Drawing[] ) {
 
-        console.log('Updating drawings', typeof data, data)
-        this.drawings = data
+      /// Получаем текущие дату и время
+      let now = new Date()
+      console.log('Updating drawings ', now)
+      this.drawings = data
 
     }
   },

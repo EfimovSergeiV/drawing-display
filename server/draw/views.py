@@ -22,7 +22,6 @@ class DrawingView(APIView):
 
     def get(self, request):
         qs = DrawingModel.objects.all()
-        print('Request: ', request)
         serializer = self.serializer_class(qs, many=True, context={'request': request})
 
         return Response(serializer.data)
@@ -43,7 +42,8 @@ class DrawingView(APIView):
                 qs.prw.delete()
                 qs.webp.delete()
                 qs.pdf.delete()
-                qs.delete()
+                qs.delete()      
+
         except:
             return Response(status=status.HTTP_404_NOT_FOUND)
         
@@ -52,6 +52,7 @@ class DrawingView(APIView):
 
     def put(self, request):
         qs = DrawingModel.objects.get(uuid=request.data.get('uuid'))
+        print('PUT REQUEST: ', request.data)
         qs.prw.delete()
         qs.webp.delete()
         qs.pdf.delete()
@@ -65,6 +66,7 @@ class DrawingView(APIView):
         }
 
         mattermost_notification('draw_completed', {'name': response_data['name'], 'completed_at': response_data['completed_at']})
+
 
         return Response(response_data, status=status.HTTP_200_OK)
 

@@ -87,6 +87,10 @@
 
 		<div class="container mx-auto px-4 py-4 pb-40 md:mb-20">
 
+      <div class="">
+        <p class="">Файлов: {{ mainStore.drawings.length }}</p>
+      </div>
+
       <div>
         <transition-group name="fade" tag="div" class="grid grid-cols-2 xl:grid-cols-5 gap-8 ">
           <div v-for="draw in mainStore.drawings" :key="draw.uuid">
