@@ -50,6 +50,7 @@
         </div>
         <div class="pl-4">
            <p class="md:text-2xl text-gray-700 font-semibold uppercase">{{ config.public.name }}</p>
+           <p class="md:text-2xl text-gray-700 font-semibold">{{ config.public.url }}</p>
         </div>
       </div>
 

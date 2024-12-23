@@ -49,6 +49,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       name: cfg.name,
+      url: cfg.url,
       baseURL: cfg.baseURL,
       socketURL: cfg.socketURL,
     },
