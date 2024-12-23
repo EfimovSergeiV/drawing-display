@@ -40,13 +40,13 @@
 
     // Событие: ошибка соединения
     socket.onerror = (error) => {
-      console.error('WebSocket ошибка:', error);
+      console.error('WebSocket ошибка: сервер не отвечает')
       statusSocket.value = true
     };
 
     // Событие: закрытие соединения
     socket.onclose = () => {
-      console.log('WebSocket соединение закрыто');
+      console.log('WebSocket соединение закрыто')
       statusSocket.value = true  
 
       connectWebSocket();
