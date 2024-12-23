@@ -39,7 +39,7 @@
 
 
 <template>
-  <div class="flex flex-col justify-between selec t-none">    
+  <div class="flex flex-col justify-between select-none">    
 
     <div class="container mx-auto px-4 py-2">
       <div class="flex items-center justify-between pt-2 pb-8">
@@ -48,9 +48,18 @@
             <img src="/smlogo.png" alt="logo" class="h-10 md:h-14" />          
           </nuxt-link>
         </div>
-        <div class="pl-4">
-           <p class="md:text-2xl text-gray-700 font-semibold uppercase">{{ config.public.name }}</p>
-           <p class="md:text-2xl text-gray-700 font-semibold">{{ config.public.url }}</p>
+
+
+        <div class="top-0 right-0 fixed -z-50">
+          <div class="bg-sky-600 w-[520px] h-[520px] rounded-bl-full">
+
+          </div>
+        </div>
+
+
+        <div class="grid grid-cols-1 gap-1 text-right">
+          <p class="md:text-xl text-white font-semibold">{{ config.public.url }}</p>
+          <p class="md:text-2xl text-white font-semibold uppercase">{{ config.public.name }}</p>
         </div>
       </div>
 

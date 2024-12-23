@@ -53,21 +53,32 @@
             <img src="/smlogo.png" alt="logo" class="h-10 md:h-14" />          
           </nuxt-link>        
         </div>
-        <div class="">
-          <div class="flex items-center justify-end pl-4">
 
-            <div v-if="loading">
-              <p class="md:text-2xl text-gray-700 font-semibold uppercase">Загрузка...</p>
+        <div class="top-0 right-0 fixed -z-50">
+          <div class="bg-sky-600 w-[520px] h-[520px] rounded-bl-full">
+
+          </div>
+        </div>
+
+        <div class="">
+          <div class="flex items-center justify-end ">
+
+            <div v-if="loading" class="">
+              <div class="flex items-center gap-3">
+                <img src="/download.png" alt="loading" class="h-6 animate-bounce" />
+                <p class="md:text-2xl text-white font-semibold uppercase">Загрузка файлов</p>
+              </div>
+
             </div>
             
             <div v-else>
               <div class="">
                 <div class="py-2">
-                  <p class="text-base text-gray-700 font-semibold uppercase text-right">Загрузить PDF файлы</p>
+                  <p class="text-base text-white font-semibold uppercase text-right">Загрузить PDF файлы</p>
                 </div>
                 
                 <input id="newfile" type="file" multiple
-                  class="block w-full text-sm text-slate-500
+                  class="block w-full text-sm text-white
                   file:mr-4 file:py-2 file:px-4
                   file:rounded-full file:border-0
                   file:text-sm file:font-semibold
@@ -76,7 +87,6 @@
                   @change="uploadFiles"
                 />                   
               </div>
-        
             </div>
           
           </div>
