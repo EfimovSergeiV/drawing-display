@@ -50,12 +50,13 @@
       <div class="grid grid-cols-1 gap-4 md:flex items-center md:justify-between pt-2 pb-2">
         <div class="">
           <nuxt-link :to="{ name: 'index' }">
-            <img src="/smlogo.png" alt="logo" class="h-10 md:h-14" />          
+            <img src="/smlogo.png" alt="logo" class="h-10 md:h-14 hidden md:block" />
+            <img src="/smlogo-white.png" alt="logo" class="h-10 md:h-14 md:hidden" />
           </nuxt-link>        
         </div>
 
         <div class="top-0 right-0 fixed -z-50">
-          <div class="bg-sky-600 w-[520px] h-[520px] rounded-bl-full">
+          <div class="bg-sky-600 w-[620px] h-[620px] rounded-bl-full">
 
           </div>
         </div>
@@ -77,15 +78,18 @@
                   <p class="text-base text-white font-semibold uppercase text-right">Загрузить PDF файлы</p>
                 </div>
                 
-                <input id="newfile" type="file" multiple
-                  class="block w-full text-sm text-white
-                  file:mr-4 file:py-2 file:px-4
-                  file:rounded-full file:border-0
-                  file:text-sm file:font-semibold
-                  file:bg-sky-700 file:text-white
-                  hover:file:bg-sky-800 transition-all duration-700"
-                  @change="uploadFiles"
-                />                   
+                <div class=" cursor-pointer">
+                  <input id="newfile" type="file" multiple
+                    class="block w-full text-sm text-white
+                    file:mr-4 file:py-2 file:px-4
+                    file:rounded-full file:border-0
+                    file:text-sm file:font-semibold
+                    file:bg-sky-700 file:text-white
+                    hover:file:bg-sky-800 transition-all duration-700"
+                    @change="uploadFiles"
+                  />
+                </div>
+
               </div>
             </div>
           
@@ -97,8 +101,8 @@
 
 		<div class="container mx-auto px-4 py-4 pb-40 md:mb-20">
 
-      <div class="">
-        <p class="">Файлов: {{ mainStore.drawings.length }}</p>
+      <div class="py-2">
+        <p class="text-white md:text-gray-900">Всего файлов: {{ mainStore.drawings.length }}</p>
       </div>
 
       <div>

@@ -45,20 +45,21 @@
       <div class="flex items-center justify-between pt-2 pb-8">
         <div class="">
           <nuxt-link :to="{ name: 'index' }">
-            <img src="/smlogo.png" alt="logo" class="h-10 md:h-14" />          
+            <img src="/smlogo.png" alt="logo" class="h-10 md:h-14 hidden md:block" />
+            <img src="/smlogo-white.png" alt="logo" class="h-10 md:h-14 md:hidden" />      
           </nuxt-link>
         </div>
 
 
         <div class="top-0 right-0 fixed -z-50">
-          <div class="bg-sky-600 w-[520px] h-[520px] rounded-bl-full">
+          <div class="bg-sky-600 w-[620px] h-[620px] rounded-bl-full">
 
           </div>
         </div>
 
 
         <div class="grid grid-cols-1 gap-1 text-right">
-          <p class="md:text-xl text-white font-semibold">{{ config.public.url }}</p>
+          <p class="text-xs md:text-xl text-white font-semibold">{{ config.public.url }}</p>
           <p class="md:text-2xl text-white font-semibold uppercase">{{ config.public.name }}</p>
         </div>
       </div>
