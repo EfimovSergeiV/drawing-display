@@ -33,60 +33,6 @@
   });
 
 
-  const backendFail = ref(false)
-  // const updateDraw = async () => {
-  //   await $fetch(`${ config.public.baseURL }draws/list/`, {
-  //     method: 'GET',
-  //     timeout: 300
-  //   }).then((response) => {
-  //     draws.value = response
-  //     backendFail.value = false
-  //   }).catch((error) => {
-  //     backendFail.value = true
-  //   })
-  // }
-
-
-  // let intervalId;
-
-  // onMounted(() => {
-  //   // Установить интервал каждые 5 минут
-  //   intervalId = setInterval(() => {
-  //     updateDraw()
-  //     // console.log('updateDraw()');
-  //   }, 5000); // 5 минут = 300000 мс
-  // });
-
-  // onUnmounted(() => {
-  //   // Очистить интервал, чтобы избежать утечек памяти
-  //   clearInterval(intervalId);
-  // });
-
-
-
-
-
-
-
-
-
-
-
-  const removeDraw = async (id) => {
-    const formData = new FormData()
-    formData.append('id', id)
-    const response = await $fetch(`${config.public.baseURL}draws/list/`, {
-      method: 'DELETE',
-      body: formData
-    })
-
-    /// Получаем новый список чертежей
-    const newDraws = await $fetch(`${ config.public.baseURL }draws/list/`)
-    draws.value = newDraws
-
-  }
-
-
   const completeDraw = async (uuid) => {
     const formData = new FormData()
     formData.append('uuid', uuid)
@@ -94,23 +40,13 @@
       method: 'PUT',
       body: formData
     })
-
-    /// Получаем новый список чертежей
-    const newDraws = await $fetch(`${ config.public.baseURL }draws/list/`)
-    draws.value = newDraws
-
   }
 
 </script>
 
 
 <template>
-  
-
-
   <div id="photoSwipeGallery relative selec t-none">
-
-
 
     <transition-group name="fade" tag="div" mode="out-in" class="gallery grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-8" >
       <div v-for="(image, index) in mainStore.drawings" :key="index" class="relative">
@@ -155,18 +91,16 @@
 </template>
 
 
-
-
 <style scoped>
-/* .gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-} */
+  /* .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  } */
 
-.gallery-item img {
-  height: auto;
-  cursor: pointer;
-  object-fit: cover;
-}
+  .gallery-item img {
+    height: auto;
+    cursor: pointer;
+    object-fit: cover;
+  }
 </style>
