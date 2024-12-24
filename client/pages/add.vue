@@ -1,9 +1,6 @@
 <script setup>
   const config = useRuntimeConfig()
   const mainStore = useMainStore()
-
-  // const { data: draws } = await useFetch(`${ config.public.baseURL }draws/list/`)
-
   const loading = ref(false)
 
 
@@ -16,29 +13,21 @@
     for (let i = 0; i < event.target.files.length; i++) {
       formData.append('files', event.target.files[i])
     }
-    const response = await fetch(`${config.public.baseURL}draws/list/`, {
+    const response = await fetch(`${config.public.baseURL}drawings/list/`, {
       method: 'POST',
       body: formData
     })
 
-    /// Получаем новый список чертежей
-    // const { data: newDraws } = await useFetch(`${ config.public.baseURL }draws/list/`)
-    // draws.value = newDraws.value
     loading.value = false
-    
   }
 
   const removeDraw = async (uuid) => {
     const formData = new FormData()
     formData.append('uuid', uuid)
-    const response = await $fetch(`${config.public.baseURL}draws/list/`, {
+    const response = await $fetch(`${config.public.baseURL}drawings/list/`, {
       method: 'DELETE',
       body: formData
     })
-
-    /// Получаем новый список чертежей
-    // const newDraws = await $fetch(`${ config.public.baseURL }draws/list/`)
-    // draws.value = newDraws
   }
 
 </script>

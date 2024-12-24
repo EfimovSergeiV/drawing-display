@@ -8,7 +8,7 @@
   const mainStore = useMainStore()
   
 
-  const { data: draws } = await useFetch(`${ config.public.baseURL }draws/list/`)
+  const { data: draws } = await useFetch(`${ config.public.baseURL }drawings/list/`)
 
   onMounted(() => {
     const lightbox = new $PhotoSwipeLightbox({
@@ -36,7 +36,7 @@
   const completeDraw = async (uuid) => {
     const formData = new FormData()
     formData.append('uuid', uuid)
-    const response = await $fetch(`${config.public.baseURL}draws/list/`, {
+    const response = await $fetch(`${config.public.baseURL}drawings/list/`, {
       method: 'PUT',
       body: formData
     })

@@ -1,11 +1,11 @@
 # API
 
 ## Base URL
-http://`hostname`.local:8080
+http://`hostname.local or 192.168.x.x`:8080
 
 ---
 
-**URL:** `/draws/list/`
+**URL:** `/drawings/list/`
 - **Методы:** `GET`, `POST`, `PUT`, `DELETE`
 
 ---

@@ -1,32 +1,6 @@
 <script setup>
   const config = useRuntimeConfig()
 
-  // const { data: draws } = await useFetch(`${ config.public.baseURL }d/draw/`)
-
-  // const updateDraw = async () => {
-  //   const newDraws = await $fetch(`${ config.public.baseURL }d/draw/`, {
-  //     method: 'GET'
-  //   })
-  //   draws.value = newDraws
-  // }
-
-
-  // let intervalId;
-
-  // onMounted(() => {
-  //   // Установить интервал каждые 5 минут
-  //   intervalId = setInterval(() => {
-  //     updateDraw()
-  //     // console.log('updateDraw()');
-  //   }, 10000); // 5 минут = 300000 мс
-  // });
-
-  // onUnmounted(() => {
-  //   // Очистить интервал, чтобы избежать утечек памяти
-  //   clearInterval(intervalId);
-  // });
-
-
   const shutdownDraw = async () => {
     await $fetch(`${ config.public.baseURL }shutdown/`, {
       method: 'GET'
@@ -50,20 +24,17 @@
           </nuxt-link>
         </div>
 
-
         <div class="top-0 right-0 fixed -z-50">
           <div class="bg-sky-600 w-[620px] h-[620px] rounded-bl-full">
 
           </div>
         </div>
 
-
         <div class="grid grid-cols-1 gap-1 text-right">
           <p class="text-xs md:text-xl text-white font-semibold">{{ config.public.url }}</p>
           <p class="md:text-2xl text-white font-semibold uppercase">{{ config.public.name }}</p>
         </div>
       </div>
-
 
       <div>
         <div class="mt-4 mb-64 md:mb-24">
@@ -72,7 +43,6 @@
       </div>
 
     </div>
-
 
 
     <div class=" fixed z-50 bottom-0 w-full">
@@ -97,7 +67,6 @@
 
       </div>
     </div>
-
 
 
   </div>
