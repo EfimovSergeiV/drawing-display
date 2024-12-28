@@ -16,19 +16,14 @@ class DrawingModel(models.Model):
     name = models.CharField(max_length=255)
     status = models.CharField(max_length=15, default='queue', choices=DRAWNING_STATUS)
     created_at = models.DateTimeField(auto_now_add=True)
-    
+    order_by = models.PositiveIntegerField(default=0)
+
     link = models.CharField(blank=True, null=True, max_length=255)
     pdf = models.FileField(upload_to='pdf/', blank=True, null=True)
+    prw = ResizedImageField(size = [420, None], upload_to='prw/', quality=80, null=True, blank=True, force_format='WEBP',)    
     webp = models.ImageField(upload_to='webp/', blank=True, null=True)
     webp_size = models.JSONField(blank=True, null=True)
-    prw = ResizedImageField(
-        size = [420, None],
-        upload_to='prw/',
-        quality=80,
-        null=True,
-        blank=True,
-        force_format='WEBP',
-    )
+
 
     def __str__(self):
         return self.name
@@ -36,6 +31,7 @@ class DrawingModel(models.Model):
     class Meta:
         verbose_name = 'Чертеж в производстве'
         verbose_name_plural = 'Чертежи в производстве'
+        ordering = ['order_by',]
 
 
 

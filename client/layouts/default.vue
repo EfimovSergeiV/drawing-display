@@ -27,7 +27,7 @@
     // Событие: получение сообщения
     socket.onmessage = (event) => {
       counter++
-      console.log('Получено сообщение:', counter)
+      // console.log('Получено сообщение:', counter)
       mainStore.updateDrawings(
         JSON.parse(event.data)
       )
@@ -86,7 +86,7 @@
 
 
 <template>
-  <div class="selec t-none">
+  <div class="sel ect-none">
     <div class="">
 
       <transition name="fade" mode="out-in">

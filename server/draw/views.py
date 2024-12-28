@@ -51,6 +51,21 @@ class DrawingView(APIView):
     
 
     def put(self, request):
+        print('PUT REQUEST: ', request.data)
+
+        mathod = request.data.get('method')
+
+        # print(f'MOVE: {mathod}')
+        if mathod == 'move':
+            from_qs = DrawingModel.objects.get(uuid=request.data.get('from'))
+            to_qs = DrawingModel.objects.get(uuid=request.data.get('to'))
+
+            DrawingModel.objects.filter(uuid=from_qs.uuid).update(order_by=to_qs.order_by)
+            DrawingModel.objects.filter(uuid=to_qs.uuid).update(order_by=from_qs.order_by)
+
+
+
+
         qs = DrawingModel.objects.get(uuid=request.data.get('uuid'))
         print('PUT REQUEST: ', request.data)
         qs.prw.delete()

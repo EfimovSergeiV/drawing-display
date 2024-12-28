@@ -18,10 +18,11 @@ class FileAdmin(admin.ModelAdmin):
 
 class DrawingAdmin(admin.ModelAdmin):
     
-        list_display = ('name', 'status', 'created_at', 'link', 'pdf', 'webp', 'prw', )
-        search_fields = ('name', 'status', 'created_at', 'link', 'pdf', 'webp', 'prw', )
-        list_filter = ('name', 'status', 'created_at', 'link', 'pdf', 'webp', 'prw', )
+        list_display = ('name', 'order_by', 'status', 'created_at', )
+        search_fields = ('name', 'created_at', 'status', 'link', 'pdf', 'webp', 'prw', )
+        list_filter = ('created_at', 'status', )
         readonly_fields = ('created_at',)
+        list_editable = ('status', 'order_by',)
         fieldsets = (
             (None, {
                 'fields': ('name', 'status', 'created_at', 'link', 'pdf', 'webp', 'prw', )

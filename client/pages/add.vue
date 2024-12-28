@@ -2,6 +2,8 @@
   const config = useRuntimeConfig()
   const mainStore = useMainStore()
   const loading = ref(false)
+  
+
 
 
   const uploadFiles = async (event) => {
@@ -30,11 +32,43 @@
     })
   }
 
+  const { x, y } = useMouse()  
+  const { pressed } = useMousePressed()
+
+  let dragIndex = null
+  let dragUUID = null
+
+  const startDrag = (event, index, uuid) => {
+    dragIndex = index
+    dragUUID = uuid
+    event.dataTransfer.effectAllowed = 'move'
+  }
+
+  const onDrop = (event, dropIndex, uuid) => {
+    if (dragIndex !== null && dragIndex !== dropIndex) {
+      const draggedItem = mainStore.drawings.splice(dragIndex, 1)[0]
+      mainStore.drawings.splice(dropIndex, 0, draggedItem)
+
+      $fetch(`${config.public.baseURL}drawings/list/`, {
+        method: 'PUT',
+        body: {
+          method: 'move',
+          from: dragUUID,
+          to: uuid
+        }
+      })
+
+    }
+    dragIndex = null
+    dragUUID = null
+  }
+
+
 </script>
 
 
 <template>
-	<div class="select-none">
+	<div class="">
 		<div class="container mx-auto px-4">
       <div class="grid grid-cols-1 gap-4 md:flex items-center md:justify-between pt-2 pb-2">
         <div class="">
@@ -88,6 +122,7 @@
 		</div>
 
 
+
 		<div class="container mx-auto px-4 py-4 pb-40 md:mb-20">
 
       <div class="py-2">
@@ -95,16 +130,30 @@
       </div>
 
       <div>
-        <transition-group name="fade" tag="div" class="grid grid-cols-2 xl:grid-cols-5 gap-8 ">
-          <div v-for="draw in mainStore.drawings" :key="draw.uuid">
-            <div class="bg-white">
+        <transition-group name="fade" tag="div" class="grid grid-cols-3 xl:grid-cols-5 gap-2 md:gap-8 ">
+          <div 
+            v-for="(draw, index) in mainStore.drawings" 
+            :key="draw.uuid"
+            draggable="true"
+            @dragstart="startDrag($event, index, draw.uuid)"
+            @dragenter.prevent
+            @dragover.prevent
+            @drop="onDrop($event, index, draw.uuid)"
+            >
+
+            <div class="bg-white cursor-move">
               
-              <div class="py-2 w-full flex items-center justify-center">
+              <div class="py-2 w-full flex items-center justify-center relative">
                 <img :src="draw.prw" alt="" class="w-full" />
+
+                <div class="absolute top-0 left-0 w-full h-full z-40">
+                  <p class=""></p>
+                </div>
+
               </div>
               
               <div class="py-2 w-full flex items-center justify-center">
-                <p class="text-center text-gray-800">{{ draw.name }}</p>
+                <p class="text-xs md:text-sm text-center text-gray-800 select-none">{{ draw.name }}</p>
               </div>
 
               <button @click="removeDraw(draw.uuid)" class="py-2 flex items-center justify-center bg-red-500 w-full active:bg-red-600">

@@ -35,6 +35,7 @@
 
   const completeDraw = async (uuid) => {
     const formData = new FormData()
+    formData.append('method', 'completed')
     formData.append('uuid', uuid)
     const response = await $fetch(`${config.public.baseURL}drawings/list/`, {
       method: 'PUT',

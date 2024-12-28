@@ -30,8 +30,13 @@ export const useMainStore = defineStore('MainStore', {
 
       /// Получаем текущие дату и время
       let now = new Date()
-      console.log('Updating drawings ', now)
-      this.drawings = data
+      // console.log('Updating drawings ', now)
+
+      // ВНИМАНИЕ! ЭТО НЕ БУДЕТ РАБОТАТЬ, КОГДА ПОДКЛЮЧИМ БЭКЕНД
+      // this.drawings = data
+      if (this.drawings !== data) {
+        this.drawings = data
+      }
 
     }
   },
