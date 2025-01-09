@@ -97,7 +97,7 @@ class DrawingView(APIView):
                 if pdf_file.name.split('.')[-1] != 'pdf':
                     print('Неверный формат файла')
                     return Response({"error": "Неверный формат файла"},status=status.HTTP_400_BAD_REQUEST)
-                
+
                 pages = convert_from_bytes(pdf_file.read())
                 for i, page in enumerate(pages):
                     output_name = f"{str(pdf_file.name).replace('.pdf','')}{i + 1}" if i > 0 else f"{str(pdf_file.name).replace('.pdf','')}"
@@ -133,10 +133,21 @@ class DrawingView(APIView):
                         charset=None,
                     )
 
+                    try:
+                        latest_order_by_qs = DrawingModel.objects.latest('order_by')
+                    except DrawingModel.DoesNotExist:
+                        latest_order_by_qs = None
+                        
+                    print('LATEST ORDER BY: ', latest_order_by_qs)
+
+                    latest_order_by = latest_order_by_qs.order_by + 1 if latest_order_by_qs else 0
+
+
                     # Подготовка данных для сериализатора
                     data = {
                         'name': f'{output_name}', 
-                        'status': 'queue', 
+                        'status': 'queue',
+                        'order_by': latest_order_by,
                         'link': None, 
                         'webp': webp_file,
                         'webp_size': {'width': width, 'height': height},
@@ -155,5 +166,7 @@ class DrawingView(APIView):
                       
             return Response(writed_draws, status=status.HTTP_201_CREATED)
 
-        except:
+        except KeyError:
+
+            print('ERROR: ', sys.exc_info())
             return Response(status=status.HTTP_400_BAD_REQUEST)
