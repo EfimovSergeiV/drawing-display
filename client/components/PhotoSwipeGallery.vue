@@ -95,8 +95,8 @@
               </div>
             </div>
 
-            <div class="flex items-center justify-center mt-2">
-              <p class="text-center text-gray-800">{{ image.name }}</p>
+            <div class="flex items-center justify-center mt-2 pb-2">
+              <p class="text-xs md:text-sm text-center text-gray-800">{{ image.name }}</p>
             </div>
 
           </div>
