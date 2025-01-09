@@ -1,3 +1,10 @@
+# NODEJS v20.16.0
+```bash
+
+nvm use 20
+
+```
+
 # Nuxt Minimal Starter
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
