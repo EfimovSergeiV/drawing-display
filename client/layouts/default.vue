@@ -86,7 +86,7 @@
 
 
 <template>
-  <div class="sel ect-none">
+  <div class="select-none">
     <div class="">
 
       <transition name="fade" mode="out-in">

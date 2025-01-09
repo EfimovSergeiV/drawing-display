@@ -44,6 +44,8 @@
       }
     }).then(() => {
       sendDrawing.value = null
+    }).catch(() => {
+      sendDrawing.value = null
     })
   }
 
