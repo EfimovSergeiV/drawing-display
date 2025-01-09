@@ -51,11 +51,9 @@ class DrawingView(APIView):
     
 
     def put(self, request):
-        print('PUT REQUEST: ', request.data)
 
         mathod = request.data.get('method')
 
-        # print(f'MOVE: {mathod}')
         if mathod == 'move':
             from_qs = DrawingModel.objects.get(uuid=request.data.get('from'))
             to_qs = DrawingModel.objects.get(uuid=request.data.get('to'))
@@ -63,24 +61,27 @@ class DrawingView(APIView):
             DrawingModel.objects.filter(uuid=from_qs.uuid).update(order_by=to_qs.order_by)
             DrawingModel.objects.filter(uuid=to_qs.uuid).update(order_by=from_qs.order_by)
 
+            response_data = {
+                "from": from_qs.uuid,
+                "to": to_qs.uuid,            }
 
 
+        if mathod == 'completed':
 
-        qs = DrawingModel.objects.get(uuid=request.data.get('uuid'))
-        print('PUT REQUEST: ', request.data)
-        qs.prw.delete()
-        qs.webp.delete()
-        qs.pdf.delete()
-        qs.delete()
+            qs = DrawingModel.objects.get(uuid=request.data.get('uuid'))
+            qs.prw.delete()
+            qs.webp.delete()
+            qs.pdf.delete()
+            qs.delete()
 
-        response_data = {
-            "uuid": qs.uuid,
-            "name": qs.name,
-            "status": "completed",
-            "completed_at": datetime.datetime.now().strftime('%d.%m.%Y %H:%M')
-        }
+            response_data = {
+                "uuid": qs.uuid,
+                "name": qs.name,
+                "status": "completed",
+                "completed_at": datetime.datetime.now().strftime('%d.%m.%Y %H:%M')
+            }
 
-        mattermost_notification('draw_completed', {'name': response_data['name'], 'completed_at': response_data['completed_at']})
+            mattermost_notification('draw_completed', {'name': response_data['name'], 'completed_at': response_data['completed_at']})
 
 
         return Response(response_data, status=status.HTTP_200_OK)
@@ -137,7 +138,7 @@ class DrawingView(APIView):
                         latest_order_by_qs = DrawingModel.objects.latest('order_by')
                     except DrawingModel.DoesNotExist:
                         latest_order_by_qs = None
-                        
+
                     print('LATEST ORDER BY: ', latest_order_by_qs)
 
                     latest_order_by = latest_order_by_qs.order_by + 1 if latest_order_by_qs else 0
