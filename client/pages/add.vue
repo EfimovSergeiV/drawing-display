@@ -78,12 +78,6 @@
           </nuxt-link>        
         </div>
 
-        <div class="top-0 right-0 fixed -z-50">
-          <div class="bg-sky-600 w-[620px] h-[620px] rounded-bl-full">
-
-          </div>
-        </div>
-
         <div class="">
           <div class="flex items-center justify-end ">
 

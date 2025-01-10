@@ -24,11 +24,6 @@
           </nuxt-link>
         </div>
 
-        <div class="top-0 right-0 fixed -z-50">
-          <div class="bg-sky-600 w-[620px] h-[620px] rounded-bl-full">
-
-          </div>
-        </div>
 
         <div class="grid grid-cols-1 gap-1 text-right">
           <p class="text-xs md:text-xl text-white font-semibold">{{ config.public.url }}</p>
