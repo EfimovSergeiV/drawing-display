@@ -70,8 +70,8 @@
 <template>
 	<div class="">
 		<div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 gap-4 md:flex items-center md:justify-between pt-2 pb-2">
-        <div class="">
+      <div class="grid grid-cols-1 gap-4 md:flex items-center md:justify-between pb-2">
+        <div class="py-6">
           <nuxt-link :to="{ name: 'index' }">
             <img src="/smlogo.png" alt="logo" class="h-10 md:h-14 hidden md:block" />
             <img src="/smlogo-white.png" alt="logo" class="h-10 md:h-14 md:hidden" />
@@ -91,7 +91,7 @@
             
             <div v-else>
               <div class="">
-                <div class="py-2">
+                <div class="py-4">
                   <p class="text-base text-white font-semibold uppercase text-right">Загрузить PDF файлы</p>
                 </div>
                 

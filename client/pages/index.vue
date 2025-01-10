@@ -15,10 +15,10 @@
 <template>
   <div class="flex flex-col justify-between select-none">    
 
-    <div class="container mx-auto px-4 py-2">
-      <div class="flex items-center justify-between pt-2 pb-8">
-        <div class="">
-          <nuxt-link :to="{ name: 'index' }">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between pb-8">
+        <div class="py-6">
+          <nuxt-link :to="{ name: 'index' }" class="">
             <img src="/smlogo.png" alt="logo" class="h-10 md:h-14 hidden md:block" />
             <img src="/smlogo-white.png" alt="logo" class="h-10 md:h-14 md:hidden" />      
           </nuxt-link>
@@ -26,8 +26,8 @@
 
 
         <div class="grid grid-cols-1 gap-1 text-right">
-          <p class="text-xs md:text-xl text-white font-semibold">{{ config.public.url }}</p>
-          <p class="md:text-2xl text-white font-semibold uppercase">{{ config.public.name }}</p>
+          <p class="text-xs md:text-xl text-white font-semibold md:py-2">{{ config.public.url }}</p>
+          <p class="text-xs md:text-2xl text-white font-semibold uppercase">{{ config.public.name }}</p>
         </div>
       </div>
 
