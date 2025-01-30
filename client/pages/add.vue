@@ -96,7 +96,7 @@
                 </div>
                 
                 <div class=" cursor-pointer">
-                  <input id="newfile" type="file" multiple
+                  <input id="newfile" type="file" accept=".pdf" multiple
                     class="block w-full text-sm text-white
                     file:mr-4 file:py-2 file:px-4
                     file:rounded-full file:border-0
