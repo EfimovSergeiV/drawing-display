@@ -172,3 +172,92 @@ GRUB_CMDLINE_LINUX=""
 
 sudo update-grub
 ```
+
+
+### NGINX конфиги
+
+```bash
+# Backend 
+sudo nano /etc/nginx/sites-enabled/dapp
+
+```
+
+```text
+server {
+    listen 8080 default_server;
+    listen [::]:8080 default_server;
+
+    client_max_body_size 3G;
+
+    location / {
+        include proxy_params;
+        proxy_pass http://127.0.0.1:8000/;
+    }
+
+    location /static/ {
+        alias /home/user/drawing-display/server/static/;
+    }
+
+    location /files/ {
+        alias /home/user/drawing-display/server/files/;
+    }
+
+    location /ws/api/ {
+        proxy_pass http://127.0.0.1:8000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+        proxy_read_timeout 60s;
+        proxy_send_timeout 60s;
+        proxy_connect_timeout 60s;
+
+        proxy_buffering off;
+    }
+
+}
+
+
+```
+
+```bash
+# Front 
+sudo nano /etc/nginx/sites-enabled/napp
+
+```
+
+```text
+map $sent_http_content_type $expires {
+    "text/html"                 epoch;
+    "text/html; charset=utf-8"  epoch;
+    default                     off;
+}
+
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    gzip            on;
+    gzip_types      text/plain application/xml text/css application/javascript;
+    gzip_min_length 1000;
+
+    location / {
+        expires $expires;
+
+        proxy_redirect                      off;
+        proxy_set_header Host               $host;
+        proxy_set_header X-Real-IP          $remote_addr;
+        proxy_set_header X-Forwarded-For    $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto  $scheme;
+        proxy_read_timeout          1m;
+        proxy_connect_timeout       1m;
+        proxy_pass                          http://localhost:3000/;
+    }
+}
+
+
+
+```
