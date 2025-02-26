@@ -5,6 +5,12 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-04-10',
   devtools: { enabled: false },
 
+  vite: {
+    server: {
+      allowedHosts: [`${ cfg.url }`,]
+    },    
+  },
+
   app: {
     head: {
       title: 'DrawingViewer',

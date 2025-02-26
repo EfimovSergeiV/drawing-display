@@ -26,7 +26,7 @@
 
 
         <div class="grid grid-cols-1 gap-1 text-right">
-          <p class="text-xs md:text-xl text-white font-semibold md:py-2">{{ config.public.url }}</p>
+          <p class="text-xs md:text-xl text-white font-semibold md:py-2">http://{{ config.public.url }}</p>
           <p class="text-xs md:text-2xl text-white font-semibold uppercase">{{ config.public.name }}</p>
         </div>
       </div>

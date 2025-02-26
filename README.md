@@ -174,6 +174,55 @@ sudo update-grub
 ```
 
 
+```bash
+sudo nano /etc/systemd/system/daphne.service
+
+[Unit]
+Description=Daphne Server for Django
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/path/to/your/project
+ExecStart=/path/to/your/venv/bin/daphne -b 127.0.0.1 -p 8001 your_project_name.asgi:application
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+sudo systemctl daemon-reload
+sudo systemctl start daphne
+sudo systemctl enable daphne
+sudo systemctl status daphne
+```
+
+
+### Application conf
+```python
+# DJANGO
+SERVER = "http://hostname.local:8080"
+BOT_TOKEN = ''
+MATTERMOST_URL = ''
+CHANNEL_ID = ''
+```
+
+# NUXT
+```javascript
+/// NUXT
+const cfg = {
+    name: "Неизвестн. участок",
+    url: 'hostname.local',
+    baseURL: 'http://hostname.local:8080/',
+    socketURL: 'ws://hostname.local:8080/',
+    passWord: '123456',
+}
+
+export default cfg
+```
+
+
+
 ### NGINX конфиги
 
 ```bash
@@ -191,7 +240,7 @@ server {
 
     location / {
         include proxy_params;
-        proxy_pass http://127.0.0.1:8000/;
+        proxy_pass http://127.0.0.1:8001;
     }
 
     location /static/ {
@@ -203,7 +252,7 @@ server {
     }
 
     location /ws/api/ {
-        proxy_pass http://127.0.0.1:8000;
+        proxy_pass http://127.0.0.1:8001;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
@@ -219,6 +268,7 @@ server {
     }
 
 }
+
 
 
 ```
@@ -260,4 +310,8 @@ server {
 
 
 
+```
+
+```bash
+pm2 startup
 ```

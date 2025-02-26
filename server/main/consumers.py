@@ -1,6 +1,6 @@
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer
-
+from main.conf import SERVER
 
 import sys
 import datetime
@@ -65,7 +65,7 @@ class MyWebSocketConsumer(AsyncWebsocketConsumer):
             counter += 1
 
             # API URL
-            base_url = f"http://deop.local:8080"
+            base_url = f"{ SERVER }" # HOTFIX WTF!?
 
             serialized_data = await self.get_serialized_data(base_url)
 
