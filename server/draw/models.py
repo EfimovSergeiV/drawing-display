@@ -19,9 +19,9 @@ class DrawingModel(models.Model):
     order_by = models.PositiveIntegerField(default=0)
 
     link = models.CharField(blank=True, null=True, max_length=255)
-    pdf = models.FileField(upload_to='pdf/', blank=True, null=True)
-    prw = ResizedImageField(size = [420, None], upload_to='prw/', quality=80, null=True, blank=True, force_format='WEBP',)    
-    webp = models.ImageField(upload_to='webp/', blank=True, null=True)
+    pdf = models.FileField(upload_to='pdf/', max_length=255, blank=True, null=True)
+    prw = ResizedImageField(size = [420, None], max_length=255, upload_to='prw/', quality=80, null=True, blank=True, force_format='WEBP',)    
+    webp = models.ImageField(upload_to='webp/', max_length=255, blank=True, null=True)
     webp_size = models.JSONField(blank=True, null=True)
 
 
