@@ -4,6 +4,21 @@ from django_resized import ResizedImageField
 
 
 
+def protected_files(instance, filename):
+    """ Генерация пути и имени файла """
+    folder = 'err'
+
+    for field in instance._meta.fields:
+        if getattr(instance, field.name) == filename:
+            folder = field.name
+            break
+
+    ext = filename.split('.')[-1]
+    filename = f"{ instance.uuid }.{ ext }"
+
+    return f"{folder}/{ filename }"
+
+
 class DrawingModel(models.Model):
     """   """
     DRAWNING_STATUS = (
@@ -13,15 +28,15 @@ class DrawingModel(models.Model):
     )
 
     uuid = models.UUIDField(verbose_name="UUID", primary_key=True, default=uuid.uuid4, unique=True)
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=500)
     status = models.CharField(max_length=15, default='queue', choices=DRAWNING_STATUS)
     created_at = models.DateTimeField(auto_now_add=True)
     order_by = models.PositiveIntegerField(default=0)
 
     link = models.CharField(blank=True, null=True, max_length=255)
-    pdf = models.FileField(upload_to='pdf/', max_length=255, blank=True, null=True)
-    prw = ResizedImageField(size = [420, None], max_length=255, upload_to='prw/', quality=80, null=True, blank=True, force_format='WEBP',)    
-    webp = models.ImageField(upload_to='webp/', max_length=255, blank=True, null=True)
+    pdf = models.FileField(upload_to=protected_files, max_length=255, blank=True, null=True)
+    prw = ResizedImageField(size = [420, None], max_length=255, upload_to=protected_files, quality=80, null=True, blank=True, force_format='WEBP',)    
+    webp = models.ImageField(upload_to=protected_files, max_length=255, blank=True, null=True)
     webp_size = models.JSONField(blank=True, null=True)
 
 

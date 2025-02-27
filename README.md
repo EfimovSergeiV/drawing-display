@@ -313,5 +313,36 @@ server {
 ```
 
 ```bash
+# NUXT AUTOSTART 
+
 pm2 startup
+pm2 start ecosystem.config.cjs
+pm2 save
+
+```
+
+### Runner
+```bash
+sudo nano /etc/systemd/system/runner.service
+[Unit]
+Description=My Python Script
+After=multi-user.target
+
+[Service]
+Type=simple
+User=user
+Environment=DISPLAY=:0
+ExecStart=/usr/bin/python3 /home/user/drawing-display/runner.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+
+sudo systemctl daemon-reload
+sudo systemctl start runner
+sudo systemctl enable runner
+sudo systemctl status runner
 ```

@@ -95,13 +95,13 @@ class DrawingView(APIView):
                 print(f"Поле: {pdf_file}, Имя файла: {pdf_file.name}, Размер: {pdf_file.size}")
 
                 # Бросаем исключение если файл не PDF
-                if pdf_file.name.split('.')[-1] != 'pdf':
+                if pdf_file.name.split('.')[-1] not in ['pdf', 'PDF']:
                     print('Неверный формат файла')
                     return Response({"error": "Неверный формат файла"},status=status.HTTP_400_BAD_REQUEST)
 
                 pages = convert_from_bytes(pdf_file.read())
                 for i, page in enumerate(pages):
-                    output_name = f"{str(pdf_file.name).replace('.pdf','')}{i + 1}" if i > 0 else f"{str(pdf_file.name).replace('.pdf','')}"
+                    output_name = f"{str(pdf_file.name).replace('.pdf','').replace('.PDF','')}{i + 1}" if i > 0 else f"{str(pdf_file.name).replace('.pdf','').replace('.PDF','')}"
 
                     webp_buffer = BytesIO()
                     page.save(webp_buffer, format='WEBP')
