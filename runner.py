@@ -14,7 +14,7 @@ while True:
 
     if server_status == 200 and client_status == 200:
         print('ЗАПУСК - СТАТУС СЕРВЕРОВ: ', server_status, client_status)
-        subprocess.run(["firefox-esr", "--kiosk", "http://tks1.local"])
+        subprocess.run(["firefox-esr", "--kiosk", CLIENT])
 
     print('ОЖИДАНИЕ - СТАТУС СЕРВЕРОВ: ', server_status, client_status)
     sleep(10)
