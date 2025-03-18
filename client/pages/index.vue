@@ -17,10 +17,10 @@
 
     <div class="container mx-auto px-4">
       <div class="flex items-center justify-between pb-8">
-        <div class="py-6">
+        <div class="py-6 ">
           <nuxt-link :to="{ name: 'index' }" class="">
-            <img src="/smlogo.png" alt="logo" class="h-10 md:h-14 hidden md:block" />
-            <img src="/smlogo-white.png" alt="logo" class="h-10 md:h-14 md:hidden" />      
+            <img src="/smlogo.png" alt="logo" class="h-10 md:h-14 hidden md:block select-none" />
+            <img src="/smlogo-white.png" alt="logo" class="h-10 md:h-14 md:hidden select-none" />      
           </nuxt-link>
         </div>
 

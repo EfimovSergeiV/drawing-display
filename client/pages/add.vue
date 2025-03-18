@@ -73,8 +73,8 @@
       <div class="grid grid-cols-1 gap-4 md:flex items-center md:justify-between pb-2">
         <div class="py-6">
           <nuxt-link :to="{ name: 'index' }">
-            <img src="/smlogo.png" alt="logo" class="h-10 md:h-14 hidden md:block" />
-            <img src="/smlogo-white.png" alt="logo" class="h-10 md:h-14 md:hidden" />
+            <img src="/smlogo.png" alt="logo" class="h-10 md:h-14 hidden md:block select-none" />
+            <img src="/smlogo-white.png" alt="logo" class="h-10 md:h-14 md:hidden select-none" />
           </nuxt-link>        
         </div>
 
