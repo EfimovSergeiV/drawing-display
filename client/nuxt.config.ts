@@ -20,7 +20,8 @@ export default defineNuxtConfig({
         { name: 'format-detection', content: 'telephone=yes' }
       ],
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/fav.png' }
+        { rel: 'icon', type: 'image/x-icon', href: '/fav.png' },
+        { rel: 'preload', type: 'image/x-icon', href: '/warning.png' }
       ],
     },
 

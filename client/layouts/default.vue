@@ -80,8 +80,7 @@
       socket.close()
     }
   })
-
-
+  
 </script>
 
 
@@ -97,7 +96,7 @@
         <div v-if="statusSocket" class="fixed z-50 top-10 md:top-0 left-0 w-full">
           <div class="flex items-center justify-center py-8 ">
             <div class=" flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-red-500/80" >
-              <img src="/warning.png" alt="logo" class="h-6 md:h-8" />
+              <img src="/warning.png" preload alt="logo" class="h-6 md:h-8" />
               <p class="text-center text-white font-bold text-xl md:text-2xl uppercase">НЕТ СВЯЗИ С СЕРВЕРОМ</p>
             </div>
             
