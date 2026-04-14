@@ -39,7 +39,7 @@
   const completeDraw = async (uuid) => {
     console.log('completeDraw', uuid)
     sendDrawing.value = uuid
-    $fetch(`${ config.apiBase }drawings/list/`, {
+    $fetch(`${ config.value.apiBase }drawings/list/`, {
       method: 'PUT',
       body: {
         method: 'completed',
