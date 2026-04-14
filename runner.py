@@ -5,7 +5,7 @@ import subprocess
 from time import sleep
 
 # Установка переменной окружения DISPLAY
-# os.environ["DISPLAY"] = ":0"
+os.environ["DISPLAY"] = ":0"
 
 
 # Генерация конфигурационного файла для клиента
