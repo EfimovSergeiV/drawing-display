@@ -21,5 +21,6 @@ class ControlView(APIView):
     def get(self, request):
         password = "123456"
         command = f"echo {password} | sudo -S /usr/sbin/shutdown now"
+        os.system(f'echo "{password}" | sudo -S systemctl stop runner')
         os.system(command)
         return Response(status=status.HTTP_200_OK)
