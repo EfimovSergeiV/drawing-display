@@ -7,7 +7,7 @@
   })
 
   const shutdownDraw = async () => {
-    await $fetch(`${ config.apiBase }shutdown/`, {
+    await $fetch(`${ config.value.apiBase }shutdown/`, {
       method: 'GET'
     })
   }
