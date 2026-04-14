@@ -16,7 +16,7 @@ nuxt_config = {
   "socketBase": f"ws://{SERVER.split('://')[1]}/"
 }
 
-with open("./client/public/config.json", "w") as f:
+with open("/home/user/drawing-display/client/public/config.json", "w") as f:
     f.write(str(nuxt_config).replace("'", '"'))
 
 
