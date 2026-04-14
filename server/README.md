@@ -1,3 +1,30 @@
+```zsh
+nano main/conf.py
+
+
+import socket
+
+def get_local_ip():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(("8.8.8.8", 80))
+    ip = s.getsockname()[0]
+    s.close()
+
+    print(f"Local IP address: {ip}")
+    return ip
+
+local_ip = get_local_ip()
+
+SERVER = f"http://{local_ip}:8080"
+CLIENT = f"http://{local_ip}"
+
+BOT_TOKEN = ''
+MATTERMOST_URL = ''
+CHANNEL_ID = ''
+```
+
+
+
 # API
 
 ## Base URL

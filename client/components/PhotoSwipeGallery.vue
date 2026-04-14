@@ -3,14 +3,17 @@
   import { useNuxtApp } from '#app';
 
   const { $PhotoSwipeLightbox, $PhotoSwipeDeepZoom } = useNuxtApp()
-  const config = useRuntimeConfig()
+  
+  const config = ref({ name: '', urlBase: '', apiBase: '', socketBase: '' })
   const props = defineProps(['markready',]);
   const mainStore = useMainStore()
   
 
-  const { data: draws } = await useFetch(`${ config.public.baseURL }drawings/list/`)
 
-  onMounted(() => {
+  onMounted(async () => {
+    const cfg = await fetch('/config.json').then(r => r.json())
+    config.value = cfg
+
     const lightbox = new $PhotoSwipeLightbox({
       gallery: '.gallery',
       children: 'a',
@@ -36,7 +39,7 @@
   const completeDraw = async (uuid) => {
     console.log('completeDraw', uuid)
     sendDrawing.value = uuid
-    $fetch(`${config.public.baseURL}drawings/list/`, {
+    $fetch(`${ config.apiBase }drawings/list/`, {
       method: 'PUT',
       body: {
         method: 'completed',

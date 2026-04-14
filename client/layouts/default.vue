@@ -2,10 +2,12 @@
 
   import { onMounted, onUnmounted } from 'vue'
   
-  const config = useRuntimeConfig()
+
   const mainStore = useMainStore()
 
-  const wsUrl = `${ config.public.socketURL }ws/api/`
+  const config = ref({ apiBase: '', socketBase: '' })
+  const wsUrl = ref('')
+
 
 
   const messages = ref<string[]>([])
@@ -15,7 +17,7 @@
 
   // Подключение к серверу WebSocket
   const connectWebSocket = () => {
-    socket = new WebSocket(wsUrl)
+    socket = new WebSocket(wsUrl.value)
 
     // Событие: открытие соединения
     socket.onopen = () => {
@@ -71,7 +73,12 @@
   }
 
   // Управление жизненным циклом WebSocket
-  onMounted(() => {
+  onMounted(async () => {
+
+    const cfg = await fetch('/config.json').then(r => r.json())
+    config.value = cfg
+    wsUrl.value = `${cfg.socketBase}ws/api/`
+
     connectWebSocket()
   })
 

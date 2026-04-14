@@ -1,10 +1,13 @@
 <script setup>
-  const config = useRuntimeConfig()
   const mainStore = useMainStore()
   const loading = ref(false)
-  
+  const config = ref({ name: '', urlBase: '', apiBase: '', socketBase: '' })
 
 
+  onMounted(async () => {
+    const cfg = await fetch('/config.json').then(r => r.json())
+    config.value = cfg
+  })
 
   const uploadFiles = async (event) => {
     
@@ -15,7 +18,7 @@
     for (let i = 0; i < event.target.files.length; i++) {
       formData.append('files', event.target.files[i])
     }
-    const response = await fetch(`${config.public.baseURL}drawings/list/`, {
+    const response = await fetch(`${config.value.apiBase}drawings/list/`, {
       method: 'POST',
       body: formData
     })
@@ -26,7 +29,7 @@
   const removeDraw = async (uuid) => {
     const formData = new FormData()
     formData.append('uuid', uuid)
-    const response = await $fetch(`${config.public.baseURL}drawings/list/`, {
+    const response = await $fetch(`${config.value.apiBase}drawings/list/`, {
       method: 'DELETE',
       body: formData
     })
@@ -48,8 +51,8 @@
     if (dragIndex !== null && dragIndex !== dropIndex) {
       const draggedItem = mainStore.drawings.splice(dragIndex, 1)[0]
       mainStore.drawings.splice(dropIndex, 0, draggedItem)
-
-      $fetch(`${config.public.baseURL}drawings/list/`, {
+      console.log("DEBUG: ", config.value.apiBase )
+      $fetch(`${config.value.apiBase}drawings/list/`, {
         method: 'PUT',
         body: {
           method: 'move',

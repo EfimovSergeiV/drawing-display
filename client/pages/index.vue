@@ -1,8 +1,13 @@
 <script setup>
-  const config = useRuntimeConfig()
+  const config = ref({ name: '', urlBase: '', apiBase: '', socketBase: '' })
+
+  onMounted(async () => {
+    const cfg = await fetch('/config.json').then(r => r.json())
+    config.value = cfg
+  })
 
   const shutdownDraw = async () => {
-    await $fetch(`${ config.public.baseURL }shutdown/`, {
+    await $fetch(`${ config.apiBase }shutdown/`, {
       method: 'GET'
     })
   }
@@ -26,8 +31,8 @@
 
 
         <div class="grid grid-cols-1 gap-1 text-right">
-          <p class="text-xs md:text-xl text-white font-semibold md:py-2">http://{{ config.public.url }}</p>
-          <p class="text-xs md:text-2xl text-white font-semibold uppercase">{{ config.public.name }}</p>
+          <p class="text-xs md:text-xl text-white font-semibold md:py-2">{{ config.urlBase }}</p>
+          <p class="text-xs md:text-2xl text-white font-semibold uppercase">{{ config.name }}</p>
         </div>
       </div>
 
