@@ -10,7 +10,7 @@ os.environ["DISPLAY"] = ":0"
 
 # Генерация конфигурационного файла для клиента
 nuxt_config = {
-  "name": "TKS-2",
+  "name": "TKS-1",
   "urlBase": CLIENT,
   "apiBase": f"{SERVER}/",
   "socketBase": f"ws://{SERVER.split('://')[1]}/"
